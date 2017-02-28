@@ -105,7 +105,19 @@ bind(this, arg1, arg2, arg3....)
         return typeof str === 'string' || str instanceof String
     }
     ```
-### 5 js数组删除(常用splice)
+
+### 5 js数组的sort
+```javascript
+a.sort(function(arg1, arg2) {
+  return arg1 - arg2;
+})
+
+```
+可以传递自定义排序函数进去排序,规则是 每次去两个数 arg1 arg2，arg1实际是在数组中相对靠前的
+一个, 如果返回值大于0 说明需要把两割参数换位置, <= 0 则并不需要换位置，所以从小到大排序的
+话，只需 return arg1 - arg2; 当arg1大于arg2时 肯定需要换位 而且返回值也大于0;
+
+### 6 js数组删除(常用splice)
 ```javascript
 var arr = [5, 6, 7]
 //删除6

@@ -64,5 +64,63 @@
 </body>
 </html>
 ```
+### 双飞翼布局
+这个和圣杯布局大致差不多，只是它不是用container的padding包含左右两边,而是用main的margin
+让左右两边放在margin里面去
 
+效果图:  
+和圣杯布局一样
+基本思路: 
+- 利用一个main-wraper 设置宽度100%, 而且和sub extra都设置有左浮动
+- 然后将sub extra利用marign定位到main-wrapper的左右两边（这里不用相对定位）
+- 这个时候 sub extra覆盖了main-wrapper内容的左右两边
+- 在main-wrapper里面使用一个main, 让它又左右margin 即可实现去掉覆盖
+- 即sub extra放入main的margin中
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .main-wrapper {
+            float: left;
+            width: 100%;
+        }
+        .main {
+            height: 300px;
+            margin-left: 210px; /*左右的外面距是用来放sub extra的*/
+            margin-right: 190px;
+            background-color: rgba(255, 0, 0, .5);
+        }
+        .sub {
+            float: left;
+            margin-left: -100%; /*让其放在main-wrapper的左边*/
+            width: 200px;
+            height: 300px;
+            background-color: rgba(0, 255, 0, .5);
+        }
+        .extra {
+            float: left;
+            margin-left: -180px; /*放在main-wrapper的右边*/
+            width: 180px;
+            height: 300px;
+            background-color: rgba(0, 0, 255, .5);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="main"></div>
+    </div>
+    <div class="sub"></div>
+    <div class="extra"></div>
+
+</body>
+</html>
+```
+参考:
+
+[网页布局](http://www.cnblogs.com/greatluoluo/p/5906926.html)  
+[CSS布局 -- 圣杯布局 & 双飞翼布局](http://www.cnblogs.com/imwtr/p/4441741.html)
