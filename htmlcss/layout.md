@@ -5,7 +5,7 @@
 内容自适应
 ### 圣杯布局
 效果图:
-![alt](http://link)
+![alt](https://github.com/yongningfu/blog/blob/master/image/grailLayout.png)
 
 基本思路: 
 - 利用一个container 设置左右padding
