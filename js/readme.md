@@ -126,3 +126,19 @@ console.log(ret) //[6]
 console.log(arr) //[5, 7]
 ```
 
+### 使用闭包思想: 如果一个函数多次执行都想引用同一个局部变量的话，那么就使用闭包
+```javascript
+
+var parent = function() {
+
+    var firstName = "fu";
+
+    //这个是children 返回的里面都可以直接引用父的firstName
+    return function() {
+        console.log(firstName);
+    }
+}
+```
+
+
+
