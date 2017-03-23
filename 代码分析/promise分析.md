@@ -88,15 +88,18 @@ function Promise(fn) {
         ret = cb(value);
         deferred.resolve(ret);
     }
-
+     //执行resolve即能确定自己的状态
     function resolve(newValue) {
+         //如果它的参数是promise的话
         if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
             var then = newValue.then;
-
-            //如果 onFulfilled 返回值为promise对象时
             if (typeof then === 'function') {
-                //那么 先执行promiseB的then  然后把它的value 传递给promiseC的resolve 或者reject
-                //即实现了 promsieB-->到promiseC的控制
+                //如果resolve参数为promise对象的话，那么先确定参数的promise状态，然
+                //后在确定自己本身的promise状态，
+               // 这里就做到了流程控制，而且把自己本身的resolve，reject传递在      
+               //newValue的 then函数，恰好还能接受newValue这个promse的内置value，
+               //这样就既做到了流程控制，又十分巧妙的获取了promsie的value
+
                 then.call(newValue, resolve, reject);
                 return;
             }
