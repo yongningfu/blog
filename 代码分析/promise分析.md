@@ -7,6 +7,7 @@ promise有几个要点要注意:
 2. then函数返回一个新的promise对象
 3. then的参数为两个函数 onFulfilled,  onrejected  以onFulfilled举例，如果onFulfilled这个函数返回的是一个普通的值时， 那么这个值就直接赋予.then本身返回的这个promise对象的value值，如果**onFulfilled返回一个promise对象的时候**,  这个是最麻烦的处理情况，(假设onFullfilled返回的promise为promiseB, 对应的.then返回的promise为promiseC)， 那么必须保证，promiseB的状态确定后，才执行promiseC的resolve(即确定promiseC的状态)， 而且promiseB的value要设置为promiseC的value
 4. 回调是异步执行的
+5. 注意是 每个then注册的函数，它的返回值都转为 then生成的promise的resolve参数
 
 理解好上面几点，就可以看下面的分析了
 
