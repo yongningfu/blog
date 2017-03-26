@@ -31,3 +31,4 @@ var sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
   }
 })();
 ```
+**还要十分注意的是 只要有一个await后面的promise是reject， 那么async就会中断，并且返回这个reject的promise**
