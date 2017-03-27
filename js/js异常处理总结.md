@@ -378,25 +378,33 @@ f()
 ```javascript
 //代码来自阮一峰es6
 
+
 function spawn(genF) {
   return new Promise(function(resolve, reject) {
     var gen = genF();
     function step(nextF) {
 
       //可以看到 每次迭代都将nextF用try catch 包裹起来, 
-      //当生成器执行过程中抛出异常时，就可以在外部捕获异常，并且立即返回 reject(e)
-      
+      //当生成器执行过程中抛出异常时，就可以在外部捕获异常，并且立即返回 reject(e)      
       try {  
         var next = nextF();
       } catch(e) {
         return reject(e); //有异常的话 直接返回一个reject promise
       }
+      //需要理解的是 为啥在这里捕获异常？？？ 前面我们已经说过，生成器是一个迭代器，按照next的流程执行，
+      // 只有next执行的时候，generator才会开始执行，执行才可能发生异常，而且生成   
+      // 器在next执行期间，内部发生的
+      //异常没有被捕获的话，可以往外抛，即再对应的next函数处，我们可以捕获异常
+      // nextF()的执行 恰好就是执行generator的next函数
+
       if(next.done) {
         return resolve(next.value);  //async的状态直到 generator全部执行完 才确定
       }
       Promise.resolve(next.value).then(function(v) {
         step(function() { return gen.next(v); });
       }, function(e) {
+        //发生错误，往生成器里面抛异常，如果这个异常在生成器内部没有被捕获，那么
+       //它可以往外抛
         step(function() { return gen.throw(e); });
       });
     }
