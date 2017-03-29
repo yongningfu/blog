@@ -15,3 +15,17 @@ console.log(obj);  //{socket: "value"}
 !!0  //false
 !!1  //true
 ```
+### 3.逻辑技巧
+逻辑技巧是一个非常有意思的事情，下面会总结子在开发中常用的逻辑技巧。
+1. 如果存在xx的话，就返回什么
+```javascript
+var ret =  num && num * 2 //如果num存在的话，就返回num *2的值
+```
+2. x存在返回x, x 不存在返回y, y不存在返回z....
+```javascript
+var ret = x || y || z
+```
+3. 要么x不存在，要么返回x的某个属性值
+```javascript
+var ret = !x || x[props]
+```
