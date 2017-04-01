@@ -29,3 +29,13 @@ var ret = x || y || z
 ```javascript
 var ret = !x || x[props]
 ```
+4. 利用多个 : ? 代替If else
+```javascript
+function match(ele) {
+    return ele === 'a' ? "match a"
+           :  ele === 'b' ? "match b"
+           : ele  === 'c' ? "match c"
+           : 'default';
+}
+match('b')  //match b
+```
