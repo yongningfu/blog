@@ -39,3 +39,9 @@ function match(ele) {
 }
 match('b')  //match b
 ```
+###4.NaN
+这个在javascript中是一个意外, 一般来说，一个值 应该和 自身 (等值 或者 全等),  但是 NaN和自身 是 不等值和全等的
+```javascript
+NaN == NaN    //false
+NaN === NaN  //false
+```
