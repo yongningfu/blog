@@ -45,3 +45,13 @@ match('b')  //match b
 NaN == NaN    //false
 NaN === NaN  //false
 ```
+###5.==或者===
+== 是等值
+===是全等
+对于基本数据类型，string number等，判断相等，我们全部用 === 全等判断
+等值有些情况要注意一下
+```javascript
+0 == '0'  //true
+0 == ''    // true
+'' == '0'  //false
+```
