@@ -11,9 +11,70 @@ flex布局必须理解 主轴 和 交叉轴两个概念为了方便，这里主�
 
 ### flex-grow flex-shrink flex-basis
 这三个属性都是相对于主轴来说的
-- flex-grow flex-shrink分配的是 剩余的占据空间
-- flex-grow  在主轴上面是否可以放大  以及放大的相对倍数
-- flex-shrink  在主轴上面是否可以缩小， 以及相应的缩小倍数
-- flex-basis  在主轴分配剩余空间之前，它占据位置的大小， 默认大小为它本身自己的大小
+- flex-grow 针对放大的情况， 即有剩余空间的情况，分配的是剩余的占据空间, 即比例乘以剩余空间
+  比如
+  ```html
+    <div class="parent">
+      <div class="child1"></div> 
+      <div class="child2"></div> 
+    </div>
+  ```
+  ```css
+    .parent {
+      width: 100px;
+    }
+    .child1 {
+      width: 50px;
+      height: 10px;
+      flex-grow: 3;
+      background: green;
+    }
+
+    .child2 {
+      width: 10px;
+      flex-grow: 1;
+      background: yellow;
+    }
+  ```
+  按照上面计算的话就是
+  .child1 width = 50 + ( 100 - 60 ) * 3 / 4 = 80px
+  .child2 width = 10 + ( 100 - 60 ) * 1 / 4 = 20px;
+  
+- flex-shrink  针对的是缩小的情况，即子大小的和大于父
+  比如
+  ```html
+    <div class="parent">
+      <div class="child1"></div> 
+      <div class="child2"></div> 
+    </div>
+  ```
+  ```css
+    .parent {
+      width: 50px;
+    }
+    .child1 {
+      width: 150px;
+      height: 10px;
+      flex-shrink: 3;
+      background: green;
+    }
+
+    .child2 {
+      width: 50px;
+      flex-shrink: 1;
+      background: yellow;
+    }
+  ```
+  **注意** flex-shrink的比例是相对于自身大小来说
+  由于上面 (150 + 50) > 50 所以 flex-shrink起作用
+  计算公式为
+  child1的缩小比例为child2的三倍, 即 child1缩小 3x, child2 缩小x
+  50 = 150 * (1- 3x) + 50 * (1 - x)
+  x = 0.3
+
+  child1 width = 150 * (1 - 3 * 0.3) = 15 
+  child2 width = 50 * (1- 0.3) = 35
+
+- flex-basis  可以理解成用来替代width的
 
 ### 最佳实践为主轴只有一条 而不用多条
